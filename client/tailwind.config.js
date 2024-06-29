@@ -9,7 +9,9 @@ export default {
 colors:{
 blackBold:"#699fcb",
 whiteBOld:"#ffffee",
-footer:"#767381"
+footer:"#767381",
+green:"#95e17d",
+headerb:'#67af63'
 
 
 
@@ -17,7 +19,7 @@ footer:"#767381"
 backgroundColor:{
 
   headerGray:'#eeeeee',
-  headerGreen:"#95e17d",
+  headerGreen:"#007814",
   borderGray:"#c8c8c8",
   footer:'#F2F2F2'
 }

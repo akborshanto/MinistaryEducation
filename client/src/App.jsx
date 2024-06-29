@@ -5,7 +5,7 @@ const App = () => {
     console.log('df')
   }
   return (
-    <div className=' bg-green-50 text-4xl'>
+    <div className='  '>
     <form action="" onSubmit={handleSubmint}>
     <label htmlFor="">Examination</label>
     <select className="select  bg-white w-full max-w-xs">
