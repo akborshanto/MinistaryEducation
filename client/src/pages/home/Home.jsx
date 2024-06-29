@@ -1,4 +1,5 @@
 import React from 'react'
+import RegisterForm from '../RegisterForm'
 
 const Home = () => {
   return (
@@ -7,8 +8,8 @@ const Home = () => {
 
 
 
+<RegisterForm></RegisterForm>
 
-    
     </div>
   )
 }

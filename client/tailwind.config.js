@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
 colors:{
-blackBold:"#699fcb",
+blackBold:"#000000",
 whiteBOld:"#ffffee",
 footer:"#767381",
 green:"#95e17d",
@@ -21,7 +21,8 @@ backgroundColor:{
   headerGray:'#eeeeee',
   headerGreen:"#007814",
   borderGray:"#c8c8c8",
-  footer:'#F2F2F2'
+  footer:'#F2F2F2',
+  inputBg:'#f4f0f2'
 }
 
 
