@@ -1,9 +1,76 @@
-import React from "react";
+import { stringify } from "postcss";
+import React, { useEffect, useState } from "react";
+import { Link, json } from "react-router-dom";
 
 const RegisterForm = () => {
+  const [userNumber, setUserNumber] = useState();
+  const [random1, setRandom1] = useState(null);
+  const [random2, setRandom2] = useState(null);
+  const [sum, setSumb] = useState(null);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const randomNumber = Math.floor(Math.random() * 10) + 1;
+    const radomNubmer2 = Math.ceil(Math.random() * 5) + 1;
+    setRandom1(randomNumber);
+    setRandom2(radomNubmer2);
+  }, []);
+
   const handleSubmint = (e) => {
-    console.log("df");
+    e.preventDefault();
+    const form = e.target;
+
+    const examination = form.examination.value;
+    const board = form.board.value;
+    const year = form.year.value;
+    const roll = form.roll.value;
+    const registration = form.registration.value;
+    const addition = form.addition.value;
+
+    /* random nubmer */
+    const totalRandom = random1 + random2;
+    if (totalRandom == addition) {
+      setError(" ");
+    } else {
+      setError("Give the Correct Number");
+    }
+    /* roll number */
+
+    if (roll.trim() === "" || isNaN(roll)) {
+      setError("Fill up roll input");
+      return;
+    } else if (roll <= 0) {
+      setError("please enter a positive number");
+      return;
+    } else if (roll.length < 6) {
+      setError("Give the alleast 6 roll number");
+    }
+    /* registraiotn */
+    if (registration.trim() === "" || isNaN(registration)) {
+      setError("Fill up Registration input");
+      return;
+    } else if (registration <= 0) {
+      setError("please enter a positive number");
+      return;
+    } else if (registration.length < 10) {
+      setError("Give the 10 Registrations nubmber");
+      return;
+    } else {
+      setError("");
+    }
+
+    const studentInfo = {
+      examination,
+      year,
+      board,
+      roll,
+      registration,
+      addition,
+    };
+    
+const stdentStorage=localStorage.setItem('studentInfo',JSON.stringify(studentInfo));
   };
+
   return (
     <div className=" border border-black w-3/4 mx-auto my-7">
       <div className="flex  justify-center  items-center p-8 ">
@@ -13,30 +80,25 @@ const RegisterForm = () => {
               Examination
             </label>
             <span className="text-2xl font-bold">:</span>
-            <select className="    textfield05  ">
-              <option disabled selected>
-                SSC/Dakhil/Equivalent
-              </option>
-              <option>SSC/Dakhil/Equivalent</option>
-              <option>JSC/JDC</option>
-              <option>SSC/DAKHIL</option>
-              <option>SSC(vocationl)</option>
-              <option>HSC/ALIM</option>
-              <option>HSC(vocationl)</option>
-              <option>HSC(BM)</option>
-              <option>Diploma in Commerce</option>
-              <option>Diploma in Business Studies</option>
+            <select className="    textfield05  " name="examination" required>
+              {examination.map((examination) => (
+                <option value={examination.examination}>
+                  {examination.examination}
+                </option>
+              ))}
             </select>
           </div>
           <div className="flex  justify-between text-center my-4">
             <label htmlFor="" className="text-blackBold font-bold text-[22px] ">
-              Year 
+              Year
             </label>
             <span className=" font-bold">:</span>
-            <select className="    textfield05  ">
-              <option className="font-bold  " disabled selected>Select One </option>
+            <select className="    textfield05  " name="year" required>
+              <option className="font-bold  " disabled selected>
+                Select One{" "}
+              </option>
               {year.reverse().map((yer) => (
-                <option>{yer.year} </option>
+                <option value={yer.year}>{yer.year} </option>
               ))}
             </select>
           </div>
@@ -45,51 +107,66 @@ const RegisterForm = () => {
               Board
             </label>
             <span className="mx-6">:</span>
-            <select className="    textfield05 ">
-              <option className="font-bold " disabled selected>Select One </option>
+            <select className="    textfield05 " name="board" required>
+              <option className="font-bold " disabled selected>
+                Select One{" "}
+              </option>
               {board.map((board) => (
-                <option className=" ">{board.board} </option>
+                <option className=" " value={board.board}>
+                  {board.board}{" "}
+                </option>
               ))}
             </select>
           </div>
           <div className="flex  justify-between text-center my-4">
             <label htmlFor="" className="text-blackBold font-bold text-[18px] ">
-              Roll 
+              Roll
             </label>
             <span className="mx-6">:</span>
-            <input type="text" className="textfield06 " />
+            <input type="text" className="textfield06 " name="roll" required />
           </div>
           <div className="flex  justify-between text-center my-4">
             <label htmlFor="" className="text-blackBold font-bold text-[18px] ">
-              Reg: No 
+              Reg: No
             </label>
             <p className="mx-6">:</p>
-            <input type="text" className="textfield06 " />
+            <input
+              type="text"
+              className="textfield06 "
+              name="registration"
+              required
+            />
           </div>
 
           {/* input */}
           <div className="flex  justify-between my-4">
-          <label htmlFor="" className="text-blackBold font-bold text-[18px] ">
-          {" "}
-          6 + 8 
-        </label>
-          <p className="mx-6">=</p>
-          <div>
-          </div>
-  
-            <input type="text" className="textfield06 " />
+            <label htmlFor="" className="text-blackBold font-bold text-[18px] ">
+              {" "}
+              {random1} + {random2}
+            </label>
+            <p className="mx-6">=</p>
+            <div></div>
+
+            <input
+              type="text"
+              className="textfield06 "
+              name="addition"
+              required
+            />
           </div>
           {/* buttton */}
           <div className="text-end">
-          <button className=" bg-inputBg  text-black w-[80px] my-5 text-[22px]  font-semibold  rounded border border-gray-400 mx-4">
-          Reset
-        </button>
-        <button className=" bg-inputBg  text-black w-[80px] my-5 text-[22px]  font-semibold  rounded border border-gray-400 ">
-          Submit
-        </button>
+            <button className=" bg-inputBg  text-black w-[80px] my-5 text-[22px]  font-semibold  rounded border border-gray-400 mx-4">
+              Reset
+            </button>
+            <button className=" bg-inputBg  text-black w-[80px] my-5 text-[22px]  font-semibold  rounded border border-gray-400 ">
+              Submit
+            </button>
+
+            <Link to={"/resultCreate"} className="bg-inputBg  text-black w-[80px] my-5 text-[22px]  font-semibold  rounded border border-gray-400">resultCreate</Link>
+
+            {error && <h1 className="text-red-400">{error}</h1>}
           </div>
-        
-          
         </form>
       </div>
     </div>
@@ -143,4 +220,35 @@ const board = [
   { board: "Technical" },
   { board: "DIBS(DHAKA)" },
 ];
+
+const examination = [
+  {
+    examination: "SSC/Dakhil/Equivalent",
+  },
+  {
+    examination: "JSC/JDC",
+  },
+  {
+    examination: "SSC/DAKHIL",
+  },
+  {
+    examination: "SSC(vocationl)",
+  },
+  {
+    examination: "HSC/ALIM",
+  },
+  {
+    examination: "HSC(vocationl)",
+  },
+  {
+    examination: "HSC(BM)",
+  },
+  {
+    examination: "Diploma in Commerce",
+  },
+  {
+    examination: "Diploma in Business Studies",
+  },
+];
+
 export default RegisterForm;

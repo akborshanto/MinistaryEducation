@@ -7,6 +7,7 @@ import {
 import "./index.css";
 import Home from "./pages/home/Home";
 import Root from "./ROOT/Root";
+import ResultCreate from "./pages/shared/ResultCreate";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,11 @@ const router = createBrowserRouter([
       {
         path:'/',
         element:<Home></Home>
-      }
+      },
+      {
+        path:'/resultCreate',
+        element:<ResultCreate></ResultCreate>
+      },
     ]
   },
 ]);
