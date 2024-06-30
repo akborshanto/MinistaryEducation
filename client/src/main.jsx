@@ -8,6 +8,7 @@ import "./index.css";
 import Home from "./pages/home/Home";
 import Root from "./ROOT/Root";
 import ResultCreate from "./pages/shared/ResultCreate";
+import ResultSheet from "./pages/ResultSheet";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path:'/resultCreate',
         element:<ResultCreate></ResultCreate>
+      },
+      {
+        path:'/resultSHeet',
+        element:<ResultSheet></ResultSheet>
       },
     ]
   },
