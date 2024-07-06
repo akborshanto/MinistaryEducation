@@ -3,6 +3,7 @@ import { Document, Page } from 'react-pdf';
 import jsPDF from 'jspdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import ResultCreate from './shared/ResultCreate';
+import Table from './shared/table';
 
 const ResultSheet = () => {
     const [numPages, setNumPages] = useState(null);
@@ -19,10 +20,32 @@ const ResultSheet = () => {
       doc.save('generated.pdf');
     };
   
+/* get the local storage data */
 
+const getLocalStorageData=JSON.parse(localStorage.getItem('allStudentInfo')) || {} 
+const{getStroage,studentData,marksheet,studentInfo,totalMarks}=getLocalStorageData ||{}
 
   return (
     <div>
+
+
+
+
+<Table getStroage={getStroage}></Table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {/* PDF*/}
     <div>
     <Document
       file="path/to/your/pdf/file.pdf"

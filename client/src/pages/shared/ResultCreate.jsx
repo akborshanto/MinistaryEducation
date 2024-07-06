@@ -1,127 +1,124 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ResultCreate = () => {
-  const [grade, setGrade] = useState("");
-  const [lettergrade, setLetterGrade] = useState("");
-  const [result, setResult] = useState("");
-  const [sebject, setSubject] = useState("");
-  const [currentGrade, setCurrengGrade] = useState("");
-  const [error, setErrof] = useState("");
+  const navigate = useNavigate();
+  // const [grade, setGrade] = useState("");
+  // const [lettergrade, setLetterGrade] = useState("");
+  // const [result, setResult] = useState("");
+  // const [sebject, setSubject] = useState("");
+  // const [currentGrade, setCurrengGrade] = useState("");
+  // const [error, setErrof] = useState("");
 
-  const getStroage = JSON.parse(localStorage.getItem("studentInfo"));
-  const { examination, year, board, roll, registration } = getStroage;
+  const getStroage = JSON.parse(localStorage.getItem("studentInfo")) || {};
+  const { examination, year, board, roll, registration } = getStroage || {};
 
   /* hadle submit */
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const name = form.name.value;
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const form = e.target;
+  //   const name = form.name.value;
 
-    const father = form.father.value;
+  //   const father = form.father.value;
 
-    const motherName = form.motherName.value;
+  //   const motherName = form.motherName.value;
 
-    const institute = form.institute.value;
-    const group = form.group.value;
+  //   const institute = form.institute.value;
+  //   const group = form.group.value;
 
-    /*  */
+  //   /*  */
 
-    /* SUBJECT  */
+  //   /* SUBJECT  */
 
-    const bangla = form.bangla.value;
+  //   const bangla = form.bangla.value;
 
-    const english = form.english.value;
+  //   const english = form.english.value;
 
-    const group1 = form.group1.value;
+  //   const group1 = form.group1.value;
 
-    const gruop2 = form.group2.value;
-    console.log(gruop2);
-    const group3 = form.group3.value;
-    //    / const ict = form.ict.value;
-    const optional = form.optional.value;
-    const subject = { bangla, english, group1, gruop2, group3, optional };
+  //   const gruop2 = form.group2.value;
+  //   console.log(gruop2);
+  //   const group3 = form.group3.value;
+  //   //    / const ict = form.ict.value;
+  //   const optional = form.optional.value;
+  //   const subject = { bangla, english, group1, gruop2, group3, optional };
 
-    /* NUMVBBER */
-    const banglaNum = form.banglaNum.value;
+  //   /* NUMVBBER */
+  //   const banglaNum = form.banglaNum.value;
 
-    const englishNum = form.englishNum.value;
+  //   const englishNum = form.englishNum.value;
 
-    const gN1 = form.gN1.value;
+  //   const gN1 = form.gN1.value;
 
-    const gN2 = form.gN2.value;
-    const gN3 = form.gN3.value;
+  //   const gN2 = form.gN2.value;
+  //   const gN3 = form.gN3.value;
 
-    const ictNum = form.ictNum.value;
+  //   const ictNum = form.ictNum.value;
 
-    const optionalNum = form.optionalNum.value;
+  //   const optionalNum = form.optionalNum.value;
 
-    // if(banglaNum >=   32 && englishNum >=32 && gN1  >= 32&& gN2 >= 32 && gN3 >= 32 && ictNum >= 32&& optionalNum  >= 32){
+  //   // if(banglaNum >=   32 && englishNum >=32 && gN1  >= 32&& gN2 >= 32 && gN3 >= 32 && ictNum >= 32&& optionalNum  >= 32){
 
-    // setLetterGrade("F")
-    // setGrade(0)
-    //  setResult("Fail")
-    // }
-    if (banglaNum >= 32) {
-      setLetterGrade("D");
-      setGrade(1);
-      setResult("Passed");
-    } else if (39 > 32``) {
-      setResult("fasil");
-    }
+  //   // setLetterGrade("F")
+  //   // setGrade(0)
+  //   //  setResult("Fail")
+  //   // }
+  //   if (banglaNum >= 32) {
+  //     setLetterGrade("D");
+  //     setGrade(1);
+  //     setResult("Passed");
+  //   } else if (39 > 32``) {
+  //     setResult("fasil");
+  //   }
 
-    const allNumber = {
-      banglaNum,
-      englishNum,
-      gN1,
-      gN2,
-      gN3,
-      ictNum,
-      optionalNum,
-    };
-    //console.log(banglaNum,englishNum,group2Num,group3Num,ictNum,optionalNum)
-    const allStudentInfo = {
-      roll,
-      registration,
+  //   const allNumber = {
+  //     banglaNum,
+  //     englishNum,
+  //     gN1,
+  //     gN2,
+  //     gN3,
+  //     ictNum,
+  //     optionalNum,
+  //   };
+  //   //console.log(banglaNum,englishNum,group2Num,group3Num,ictNum,optionalNum)
+  //   const allStudentInfo = {
+  //     roll,
+  //     registration,
 
-      board,
-      Type: "REGULAR",
-      year,
-      examination,
+  //     board,
+  //     Type: "REGULAR",
+  //     year,
+  //     examination,
 
-      Birth: "Date of Birth",
-      /* name */
-      name,
-      father,
-      motherName,
-      institute,
-      group,
-    };
-    console.log(allStudentInfo, allNumber, subject);
+  //     Birth: "Date of Birth",
+  //     /* name */
+  //     name,
+  //     father,
+  //     motherName,
+  //     institute,
+  //     group,
+  //   };
+  //   console.log(allStudentInfo, allNumber, subject);
 
-    // if (bangla < 33) {
-    //   setGrade("F");
-    // } else {
-    //   setGrade("FAIL");
-    // }
-  };
+  //   // if (bangla < 33) {
+  //   //   setGrade("F");
+  //   // } else {
+  //   //   setGrade("FAIL");
+  //   // }
+  // };
   /* hadnle change */
 
   const [formFields, setFormFields] = useState([{ subject: "", marks: "" }]);
+
   const [studentName, setStudentName] = useState("");
   const [studentData, setStudentData] = useState(null);
-
-  const handleSubmits = (e) => {
-    e.preventDefault();
-    const cgpa = calculateCgap(formFields);
-    setStudentData({ name: studentName, marksheet: formFields, cgpa });
-  };
+  const [allStudeDentInof, setAllStudentInfo] = useState(null);
 
   /* c */
 
   const handleChange = (index, event) => {
     const { name, value } = event.target;
-
+    console.log(value, "VASLUE");
     // Validate marks input
     if (name === "marks") {
       const marksValue = parseInt(value, 10);
@@ -173,95 +170,125 @@ const ResultCreate = () => {
     }
   };
   const totalMarks = studentData?.marksheet?.reduce(
-    (total, subject) => total + parseInt(subject.marks),
+    (total, subject) => total + parseInt(subject?.marks),
     0
   );
+  const handleSubmits = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const name = form.name.value;
+
+    const father = form.father.value;
+
+    const motherName = form.motherName.value;
+
+    const institute = form.institute.value;
+    const group = form.group.value;
+
+    const studentInfo = { name, father, motherName, institute, group };
+    setAllStudentInfo({ studentInfo, studentData, totalMarks ,getStroage});
+
+    const cgpa = calculateCgap(formFields);
+    setStudentData({ name: studentName, marksheet: formFields, cgpa });
+
+    /* local storage setiIte */
+    const allStudentInfoLocalStorage =
+      localStorage.setItem(
+        "allStudentInfo",
+        JSON.stringify(allStudeDentInof)
+      ) || {};
+      console.log(allStudentInfoLocalStorage)
+
+   // navigate("/resultSHeet")
+  };
 
   return (
     <div>
-      <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-0 lg:gap-4">
-        <div>
-          <label className="text-blackBold font-bold text-[18px] mx-2 ">
-            <div className="label">
-              <span className="label-text"> Roll No</span>
-            </div>
-            <input
-              type="text"
-              placeholder="Type here"
-              className="textfield06 text-xl"
-              name="roll"
-              defaultValue={roll}
-              disabled
-            />
-          </label>
+      {/* subject  */}
+      <form onSubmit={handleSubmits} className=" text-center my-10 border p-7 ">
+        <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-0 lg:gap-4">
+          <div>
+            <label className="text-blackBold font-bold text-[18px] mx-2 ">
+              <div className="label">
+                <span className="label-text"> Roll No</span>
+              </div>
+              <input
+                type="text"
+                placeholder="Type here"
+                className="textfield06 text-xl"
+                name="roll"
+                defaultValue={roll}
+                disabled
+              />
+            </label>
+          </div>
+          <div>
+            <label className="text-blackBold font-bold text-[18px] mx-2">
+              <div className="label">
+                <span className="label-text"> your name?</span>
+              </div>
+              <input
+                type="text"
+                placeholder="Your Father`s Name"
+                className="textfield06 text-xl font-bold "
+                name="name"
+              />
+            </label>
+          </div>
+          <div>
+            <label className="text-blackBold font-bold text-[18px] mx-2 ">
+              <div className="label">
+                <span className="label-text">Your Father`s Name</span>
+              </div>
+              <input
+                type="text"
+                placeholder="Your Father`s Name"
+                className="textfield06 text-xl"
+                name="father"
+              />
+            </label>
+          </div>
+          <div>
+            <label className="text-blackBold font-bold text-[18px] mx-2 ">
+              <div className="label">
+                <span className="label-text">Your Mother`s Name</span>
+              </div>
+              <input
+                type="text"
+                placeholder="Your Mother`s Name"
+                className="textfield06 text-xl"
+                name="motherName"
+              />
+            </label>
+          </div>
+          <div>
+            <label className="text-blackBold font-bold text-[18px] mx-2 ">
+              <div className="label">
+                <span className="label-text"> Institue</span>
+              </div>
+              <input
+                type="text"
+                placeholder="Institute"
+                className="textfield06 text-xl"
+                name="institute"
+              />
+            </label>
+          </div>
+          <div>
+            <label className="text-blackBold font-bold text-[18px] mx-2 ">
+              <div className="label">
+                <span className="label-text"> Group</span>
+              </div>
+              <input
+                type="text"
+                placeholder="Type here"
+                className="textfield06 text-xl"
+                name="group"
+              />
+            </label>
+          </div>
         </div>
-        <div>
-          <label className="text-blackBold font-bold text-[18px] mx-2">
-            <div className="label">
-              <span className="label-text"> your name?</span>
-            </div>
-            <input
-              type="text"
-              placeholder="Your Father`s Name"
-              className="textfield06 text-xl font-bold "
-              name="name"
-            />
-          </label>
-        </div>
-        <div>
-          <label className="text-blackBold font-bold text-[18px] mx-2 ">
-            <div className="label">
-              <span className="label-text">Your Father`s Name</span>
-            </div>
-            <input
-              type="text"
-              placeholder="Your Father`s Name"
-              className="textfield06 text-xl"
-              name="father"
-            />
-          </label>
-        </div>
-        <div>
-          <label className="text-blackBold font-bold text-[18px] mx-2 ">
-            <div className="label">
-              <span className="label-text">Your Mother`s Name</span>
-            </div>
-            <input
-              type="text"
-              placeholder="Your Mother`s Name"
-              className="textfield06 text-xl"
-              name="motherName"
-            />
-          </label>
-        </div>
-        <div>
-          <label className="text-blackBold font-bold text-[18px] mx-2 ">
-            <div className="label">
-              <span className="label-text"> Institue</span>
-            </div>
-            <input
-              type="text"
-              placeholder="Institute"
-              className="textfield06 text-xl"
-              name="institute"
-            />
-          </label>
-        </div>
-        <div>
-          <label className="text-blackBold font-bold text-[18px] mx-2 ">
-            <div className="label">
-              <span className="label-text"> Group</span>
-            </div>
-            <input
-              type="text"
-              placeholder="Type here"
-              className="textfield06 text-xl"
-              name="group"
-            />
-          </label>
-        </div>
-      </div>
-      <form onSubmit={handleSubmits} className="my-6">
         <div className="mx-2">
           <label
             htmlFor=""
@@ -284,7 +311,7 @@ const ResultCreate = () => {
             <div>
               <div className=" flex gap-4 my-4 ">
                 <div className=" flex gap-3 items-center">
-                <h2 className="">{index + 1}</h2>
+                  <h2 className="">{index + 1}</h2>
                   <label
                     htmlFor=""
                     className="text-blackBold font-bold text-[13px] lg:text-[18px] mx-2"
@@ -297,7 +324,6 @@ const ResultCreate = () => {
                     value={field.sub}
                     onChange={(event) => handleChange(index, event)}
                     className="textfield06"
-                    required
                   ></input>
                 </div>
                 <div className="flex  gap-4">
@@ -310,7 +336,7 @@ const ResultCreate = () => {
                   <input
                     type="number"
                     name="marks"
-                    value={field.marks}
+                    value={field?.marks}
                     onChange={(event) => handleChange(index, event)}
                     className="textfield06"
                     required
@@ -320,12 +346,9 @@ const ResultCreate = () => {
 
               {/* button  */}
 
-              <div>
-          
-              </div>
-{/* buttotn */}
+              <div></div>
+              {/* buttotn */}
               <div className=" mx-2">
-        
                 {formFields.length < 14 && (
                   <button
                     type="button"
@@ -348,41 +371,16 @@ const ResultCreate = () => {
             </div>
           ))}
         </div>
-<div className="text-center my-6">        <button
-type="submit "
-className="bg-inputBg  text-black w-[140px] h-[40px] my-2 text-[16px]  font-semibold  rounded border border-gray-400"
->
-Genarate 
-</button>
-</div>
-
-
-
-
+        <div className="text-center my-6">
+          {" "}
+          <button
+            type="submit "
+            className="bg-inputBg  text-black w-[140px] h-[40px] my-2 text-[16px]  font-semibold  rounded border border-gray-400"
+          >
+            Genarate
+          </button>
+        </div>
       </form>
-
-
-
-
-
-
-
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       {/* myhseld */}
       <h2>{studentData?.name}</h2>
@@ -398,7 +396,7 @@ Genarate
       {/* input filed */}
 
       {
-        <form onSubmit={handleSubmit}>
+        <form>
           {/* subject */}
           {/*         <div className="  text-center my-10 border p-7   ">
           <div className="flex  justify-center my-2 ">
