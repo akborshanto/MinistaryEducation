@@ -66,7 +66,7 @@ const ResultCreate = () => {
       setLetterGrade("D");
       setGrade(1);
       setResult("Passed");
-    }else if ( 39 > 32`` ){
+    } else if (39 > 32``) {
       setResult("fasil");
     }
 
@@ -107,99 +107,300 @@ const ResultCreate = () => {
   };
   /* hadnle change */
 
+  const [formFields, setFormFields] = useState([{ subject: "", marks: "" }]);
+  const [studentName, setStudentName] = useState("");
+  const [studentData, setStudentData] = useState(null);
+
+  const handleSubmits = (e) => {
+    e.preventDefault();
+    const cgpa = calculateCgap(formFields);
+    setStudentData({ name: studentName, marksheet: formFields, cgpa });
+  };
+
+  /* c */
+
+  const handleChange = (index, event) => {
+    const { name, value } = event.target;
+
+    // Validate marks input
+    if (name === "marks") {
+      const marksValue = parseInt(value, 10);
+      if (isNaN(marksValue) || marksValue < 0 || marksValue > 100) {
+        return; // Exit early if marks are invalid
+      }
+
+      console.log(index, event);
+      const values = [...formFields];
+      values[index][event.target.name] = event.target.value;
+      setFormFields(values);
+    }
+  };
+
+  /* calculate cgpa */
+
+  const handleRemoveField = (index) => {
+    if (formFields.length > 1) {
+      const values = [...formFields];
+      values.splice(index, 1);
+      setFormFields(values);
+    }
+  };
+  const convertToGradePoint = (marks) => {
+    if (marks >= 80) return 5;
+    if (marks >= 79) return 4;
+    if (marks >= 69) return 3.5;
+    if (marks >= 59) return 3;
+    if (marks >= 49) return 2;
+    if (marks >= 39) return 1;
+
+    if (marks >= 32) return 0;
+
+    return 0.0;
+  };
+
+  const calculateCgap = (marksheet) => {
+    const totalPoint = marksheet.reduce(
+      (acc, field) => acc + convertToGradePoint(field.marks),
+      0
+    );
+    const cgpa = totalPoint / marksheet.length;
+    return cgpa.toFixed(2);
+  };
+  /* handle add field */
+  const handleAddField = () => {
+    if (formFields.length < 14) {
+      setFormFields([...formFields, { subject: "", marks: "" }]);
+    }
+  };
+  const totalMarks = studentData?.marksheet?.reduce(
+    (total, subject) => total + parseInt(subject.marks),
+    0
+  );
+
   return (
     <div>
-      <h1>{grade}</h1>
-      <h1>{result}</h1>
-      <h1>{lettergrade}</h1>
-      <h1 className="text-2xl text-red-500"></h1>
+      <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-0 lg:gap-4">
+        <div>
+          <label className="text-blackBold font-bold text-[18px] mx-2 ">
+            <div className="label">
+              <span className="label-text"> Roll No</span>
+            </div>
+            <input
+              type="text"
+              placeholder="Type here"
+              className="textfield06 text-xl"
+              name="roll"
+              defaultValue={roll}
+              disabled
+            />
+          </label>
+        </div>
+        <div>
+          <label className="text-blackBold font-bold text-[18px] mx-2">
+            <div className="label">
+              <span className="label-text"> your name?</span>
+            </div>
+            <input
+              type="text"
+              placeholder="Your Father`s Name"
+              className="textfield06 text-xl font-bold "
+              name="name"
+            />
+          </label>
+        </div>
+        <div>
+          <label className="text-blackBold font-bold text-[18px] mx-2 ">
+            <div className="label">
+              <span className="label-text">Your Father`s Name</span>
+            </div>
+            <input
+              type="text"
+              placeholder="Your Father`s Name"
+              className="textfield06 text-xl"
+              name="father"
+            />
+          </label>
+        </div>
+        <div>
+          <label className="text-blackBold font-bold text-[18px] mx-2 ">
+            <div className="label">
+              <span className="label-text">Your Mother`s Name</span>
+            </div>
+            <input
+              type="text"
+              placeholder="Your Mother`s Name"
+              className="textfield06 text-xl"
+              name="motherName"
+            />
+          </label>
+        </div>
+        <div>
+          <label className="text-blackBold font-bold text-[18px] mx-2 ">
+            <div className="label">
+              <span className="label-text"> Institue</span>
+            </div>
+            <input
+              type="text"
+              placeholder="Institute"
+              className="textfield06 text-xl"
+              name="institute"
+            />
+          </label>
+        </div>
+        <div>
+          <label className="text-blackBold font-bold text-[18px] mx-2 ">
+            <div className="label">
+              <span className="label-text"> Group</span>
+            </div>
+            <input
+              type="text"
+              placeholder="Type here"
+              className="textfield06 text-xl"
+              name="group"
+            />
+          </label>
+        </div>
+      </div>
+      <form onSubmit={handleSubmits} className="my-6">
+        <div className="mx-2">
+          <label
+            htmlFor=""
+            className="text-blackBold font-bold text-[13px] lg:text-[18px] mx-2"
+          >
+            YOUR NAME
+          </label>
+          <input
+            type="text"
+            value={studentName}
+            onChange={(e) => setStudentName(e.target.value)}
+            className="textfield06"
+          ></input>
+        </div>
+
+        {/* marksheet */}
+        {/* input map */}
+        <div className=" grid grid-cols-1 justify-items-center w-[300px] mx-auto">
+          {formFields.map((field, index) => (
+            <div>
+              <div className=" flex gap-4 my-4 ">
+                <div className=" flex gap-3 items-center">
+                <h2 className="">{index + 1}</h2>
+                  <label
+                    htmlFor=""
+                    className="text-blackBold font-bold text-[13px] lg:text-[18px] mx-2"
+                  >
+                    SUBJECT
+                  </label>
+                  <input
+                    type="text"
+                    name="subject"
+                    value={field.sub}
+                    onChange={(event) => handleChange(index, event)}
+                    className="textfield06"
+                    required
+                  ></input>
+                </div>
+                <div className="flex  gap-4">
+                  <label
+                    htmlFor=""
+                    className="text-blackBold font-bold text-[13px] lg:text-[18px] mx-2"
+                  >
+                    MARKS
+                  </label>
+                  <input
+                    type="number"
+                    name="marks"
+                    value={field.marks}
+                    onChange={(event) => handleChange(index, event)}
+                    className="textfield06"
+                    required
+                  ></input>
+                </div>
+              </div>
+
+              {/* button  */}
+
+              <div>
+          
+              </div>
+{/* buttotn */}
+              <div className=" mx-2">
+        
+                {formFields.length < 14 && (
+                  <button
+                    type="button"
+                    onClick={handleAddField}
+                    className="bg-inputBg  ext-black w-[140px] h-[40px] my-2 text-[16px]  font-semibold  rounded border border-gray-400"
+                  >
+                    Add Subject
+                  </button>
+                )}
+                {formFields.length > 1 && (
+                  <button
+                    type="button"
+                    className="bg-inputBg ext-black w-[140px] h-[40px] my-2 text-[16px]  font-semibold  rounded border border-gray-400"
+                    onClick={() => handleRemoveField(index)}
+                  >
+                    Remove
+                  </button>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+<div className="text-center my-6">        <button
+type="submit "
+className="bg-inputBg  text-black w-[140px] h-[40px] my-2 text-[16px]  font-semibold  rounded border border-gray-400"
+>
+Genarate 
+</button>
+</div>
+
+
+
+
+      </form>
+
+
+
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      {/* myhseld */}
+      <h2>{studentData?.name}</h2>
+      <h1 className="bg-red-300 text-white">{totalMarks}</h1>
+      {studentData?.marksheet.map((info) => (
+        <div>
+          <h1>SUBJECT:{info?.subject}</h1>
+          <h2>NUMBER:{info?.marks}</h2>
+          <p>CGPA: {studentData?.cgpa}</p>
+        </div>
+      ))}
 
       {/* input filed */}
-      <form onSubmit={handleSubmit}>
-        <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-0 lg:gap-4">
-          <div>
-            <label className="text-blackBold font-bold text-[18px] mx-2 ">
-              <div className="label">
-                <span className="label-text"> Roll No</span>
-              </div>
-              <input
-                type="text"
-                placeholder="Type here"
-                className="textfield06 text-xl"
-                name="roll"
-                defaultValue={roll}
-                disabled
-              />
-            </label>
-          </div>
-          <div>
-            <label className="text-blackBold font-bold text-[18px] mx-2">
-              <div className="label">
-                <span className="label-text"> your name?</span>
-              </div>
-              <input
-                type="text"
-                placeholder="Your Father`s Name"
-                className="textfield06 text-xl font-bold "
-                name="name"
-              />
-            </label>
-          </div>
-          <div>
-            <label className="text-blackBold font-bold text-[18px] mx-2 ">
-              <div className="label">
-                <span className="label-text">Your Father`s Name</span>
-              </div>
-              <input
-                type="text"
-                placeholder="Your Father`s Name"
-                className="textfield06 text-xl"
-                name="father"
-              />
-            </label>
-          </div>
-          <div>
-            <label className="text-blackBold font-bold text-[18px] mx-2 ">
-              <div className="label">
-                <span className="label-text">Your Mother`s Name</span>
-              </div>
-              <input
-                type="text"
-                placeholder="Your Mother`s Name"
-                className="textfield06 text-xl"
-                name="motherName"
-              />
-            </label>
-          </div>
-          <div>
-            <label className="text-blackBold font-bold text-[18px] mx-2 ">
-              <div className="label">
-                <span className="label-text"> Institue</span>
-              </div>
-              <input
-                type="text"
-                placeholder="Institute"
-                className="textfield06 text-xl"
-                name="institute"
-              />
-            </label>
-          </div>
-          <div>
-            <label className="text-blackBold font-bold text-[18px] mx-2 ">
-              <div className="label">
-                <span className="label-text"> Group</span>
-              </div>
-              <input
-                type="text"
-                placeholder="Type here"
-                className="textfield06 text-xl"
-                name="group"
-              />
-            </label>
-          </div>
-        </div>
-        {/* subject */}
-        <div className="  text-center my-10 border p-7   ">
+
+      {
+        <form onSubmit={handleSubmit}>
+          {/* subject */}
+          {/*         <div className="  text-center my-10 border p-7   ">
           <div className="flex  justify-center my-2 ">
             <label
               htmlFor=""
@@ -276,6 +477,8 @@ const ResultCreate = () => {
               className="textfieldnum "
               name="gN1"
               required
+              min="0"
+              max="100"
             />
           </div>
           <div className="flex  justify-center my-2 ">
@@ -384,8 +587,9 @@ const ResultCreate = () => {
           >
             Submit
           </button>
-        </div>
-      </form>
+        </div> */}
+        </form>
+      }
     </div>
   );
 };
