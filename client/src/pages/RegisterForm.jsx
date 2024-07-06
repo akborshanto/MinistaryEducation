@@ -1,8 +1,9 @@
 import { stringify } from "postcss";
 import React, { useEffect, useState } from "react";
-import { Link, json } from "react-router-dom";
+import { Link, json, useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
+  const navigate=useNavigate()
   const [userNumber, setUserNumber] = useState();
   const [random1, setRandom1] = useState(null);
   const [random2, setRandom2] = useState(null);
@@ -69,8 +70,11 @@ const RegisterForm = () => {
     };
     
 const stdentStorage=localStorage.setItem('studentInfo',JSON.stringify(studentInfo));
-  };
 
+// e.target.reset()
+navigate('/resultCreate')
+
+  };
   return (
     <div className=" border border-black w-3/4 mx-auto my-7">
       <div className="flex  justify-center  items-center p-8 ">
@@ -156,14 +160,16 @@ const stdentStorage=localStorage.setItem('studentInfo',JSON.stringify(studentInf
           </div>
           {/* buttton */}
           <div className="text-end">
-            <button className=" bg-inputBg  text-black w-[80px] my-5 text-[22px]  font-semibold  rounded border border-gray-400 mx-4">
+            <button  className=" bg-inputBg  text-black w-[80px] my-5 text-[22px]  font-semibold  rounded border border-gray-400 mx-4">
               Reset
             </button>
-            <button className=" bg-inputBg  text-black w-[80px] my-5 text-[22px]  font-semibold  rounded border border-gray-400 ">
-              Submit
-            </button>
+         <Link  >
+         <button className=" bg-inputBg  text-black w-[80px] my-5 text-[22px]  font-semibold  rounded border border-gray-400 ">
+         Submit
+       </button>
+         </Link>
 
-            <Link to={"/resultCreate"} className="bg-inputBg  text-black w-[80px] my-5 text-[22px]  font-semibold  rounded border border-gray-400">resultCreate</Link>
+            <Link  className="bg-inputBg  text-black w-[80px] my-5 text-[22px]  font-semibold  rounded border border-gray-400">resultCreate</Link>
 
             {error && <h1 className="text-red-400">{error}</h1>}
           </div>

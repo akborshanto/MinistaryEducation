@@ -15,7 +15,7 @@ const ResultSheet = () => {
     const generatePDF = () => {
       const doc = new jsPDF();
       doc.text('Hello world!', 10, 10);
-      doc.text('<ResultCreate></ResultCreate>' 10, 20);
+      doc.text('fdg', 10, 20);
       doc.save('generated.pdf');
     };
   
