@@ -1,0 +1,4 @@
+.element {
+    background-color: oklch(50% 50% 180);
+    /* Replace with a valid color format if "oklch" is not supported */
+  }

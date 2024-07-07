@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useRef } from 'react';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
+import './pdf.css'
+const Table = ({ getLocalStorageData,handleDownloadPDF,handlePrint }) => {
+  const componentRef = useRef();
+  const handleDownloadPDs = () => {
+    const input = componentRef.current;
 
-const Table = ({ getLocalStorageData }) => {
+    html2canvas(input)
+      .then((canvas) => {
+        const imgData = canvas.toDataURL('../../assets/banner_flag.jpg');
+        const pdf = new jsPDF();
+        const imgWidth = 210; // PDF width (A4 size)
+        const imgHeight = (canvas.height * imgWidth) / canvas.width; // Scale height proportionally to width
+        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+        pdf.save('download.pdf');
+      });
+  }
   console.log(getLocalStorageData);
   const { examination, year, board, roll, registration } =
     getLocalStorageData?.getStroage || {};
@@ -9,8 +25,14 @@ const Table = ({ getLocalStorageData }) => {
     getLocalStorageData?.studentInfo || {};
   const { cgpa, marksheet, totalMarks } =
     getLocalStorageData?.studentData || {};
+    const getColorStyle = () => {
+      // Replace with dynamic logic to determine color based on application state or props
+      const color = 'rgb(0, 128, 255)';
+      return { backgroundColor: color };
+    };
   return (
-    <div>
+    <div ref={componentRef} className='element' style={getColorStyle()} >
+    <button onClick={handleDownloadPDs}>Download PDF</button>
       <h1 className="text-blackBold font-bold text-3xl text-center my-4">
         {examination} Result {year}
       </h1>
@@ -98,10 +120,15 @@ const Table = ({ getLocalStorageData }) => {
 }
 
 
-
           </tbody>
         </table>
+        <h1 className="text-center text-blackBold">Total Marks:{getLocalStorageData?.totalMarks}</h1>
+
       </div>
+
+ <button onClick={handlePrint}>Print Marksheet</button>
+      <button onClick={handleDownloadPDF}>Download Marksheet as PDF</button>
+
     </div>
   );
 };
