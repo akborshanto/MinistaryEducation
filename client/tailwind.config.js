@@ -22,7 +22,8 @@ backgroundColor:{
   headerGreen:"#007814",
   borderGray:"#c8c8c8",
   footer:'#F2F2F2',
-  inputBg:'#f4f0f2'
+  inputBg:'#f4f0f2',
+  gradeBg:"#afb7be"
 }
 
 

@@ -23,7 +23,6 @@ const ResultSheet = () => {
 /* get the local storage data */
 
 const getLocalStorageData=JSON.parse(localStorage.getItem('allStudentInfo')) || {} 
-const{getStroage,studentData,marksheet,studentInfo,totalMarks}=getLocalStorageData ||{}
 
   return (
     <div>
@@ -31,7 +30,7 @@ const{getStroage,studentData,marksheet,studentInfo,totalMarks}=getLocalStorageDa
 
 
 
-<Table getStroage={getStroage}></Table>
+<Table getLocalStorageData={getLocalStorageData} ></Table>
 
 
 
