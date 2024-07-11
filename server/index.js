@@ -1,29 +1,23 @@
-const express=require('express')
-const cors=require('cors')
-require('dotenv').config()
-const port=process.env.PORT || 5000;
-const app=express()
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+const port =3000;
+const app = express();
 
-const corsOption={origin:['http://localhost:5000'],
+const corsOption = {
+  origin: ["http://localhost:5173"],
 
-Credential:true,
-optionSUccessStatus:200
-
-}
-app.use(cors(corsOption))
-app.use(express.json())
-app.get('/',(req,res)=>{
-
-    res.send("SUCCESSFLLY")
-})
+  Credential: true,
+  optionSUccessStatus: 200,
+};
+app.use(cors(corsOption));
+app.use(express.json());
 
 
 
-
-/* connect mongodb */
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://minstery-education:Q6fsZSxvvmaPuqhP@cluster1.phei2xm.mongodb.net/?appName=Cluster1";
+const uri = "mongodb+srv://education-minister:S8Yascq6FFBprgh5@cluster1.phei2xm.mongodb.net/?appName=Cluster1";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -37,7 +31,22 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    //await client.connect();
+
+const db=client.db('education-minister')
+const  allStudentInfo=db.collection('all-studentCollection')
+
+
+
+/* post method */
+app.post('/allStudentInfo',async (req,res)=>{
+  const query=req.body;
+  const result= await allStudentInfo.insertOne(query)
+  console.log(result)
+  res.send(result)
+})
+
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
@@ -61,7 +70,12 @@ run().catch(console.dir);
 
 
 
+app.get("/", (req, res) => {
+  res.send("SUCCESsafdsadfdsSFLLY");
+});
+
+/* connect mongodb */
 
 app.listen(port,()=>{
-    console.log("LISTENING PORT")
+  console.log("dfsafa")
 })
