@@ -10,6 +10,7 @@ import Root from "./ROOT/Root";
 import ResultCreate from "./pages/shared/ResultCreate";
 import ResultSheet from "./pages/ResultSheet";
 import CustomResult from "./custom-result/CustomResult";
+import CustomMarksheet from "./custom-result/CustomMarksheet";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path:'/custom-result',
         element:<CustomResult></CustomResult>
+      },
+      {
+        path:'/custom-marksheet',
+        element:<CustomMarksheet></CustomMarksheet>
       }
       // {
       //   path:'/resultCreate',
