@@ -9,6 +9,7 @@ import Home from "./pages/home/Home";
 import Root from "./ROOT/Root";
 import ResultCreate from "./pages/shared/ResultCreate";
 import ResultSheet from "./pages/ResultSheet";
+import CustomResult from "./custom-result/CustomResult";
 
 const router = createBrowserRouter([
   {
@@ -22,13 +23,17 @@ const router = createBrowserRouter([
         element:<Home></Home>
       },
       {
-        path:'/resultCreate',
-        element:<ResultCreate></ResultCreate>
-      },
-      {
-        path:'/resultSHeet',
-        element:<ResultSheet></ResultSheet>
-      },
+        path:'/custom-result',
+        element:<CustomResult></CustomResult>
+      }
+      // {
+      //   path:'/resultCreate',
+      //   element:<ResultCreate></ResultCreate>
+      // },
+      // {
+      //   path:'/resultSHeet',
+      //   element:<ResultSheet></ResultSheet>
+      // },
     ]
   },
 ]);

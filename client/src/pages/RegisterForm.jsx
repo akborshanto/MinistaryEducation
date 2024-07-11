@@ -70,9 +70,9 @@ const RegisterForm = () => {
     };
     
 const stdentStorage=localStorage.setItem('studentInfo',JSON.stringify(studentInfo));
-
+navigate('/custom-result')
 // e.target.reset()
-navigate('/resultCreate')
+console.log(stdentStorage,"STORAGE")
 
   };
   return (
@@ -160,20 +160,27 @@ navigate('/resultCreate')
           </div>
           {/* buttton */}
           <div className="text-end">
-            <button  className=" bg-inputBg  text-black w-[80px] my-5 text-[22px]  font-semibold  rounded border border-gray-400 mx-4">
-              Reset
-            </button>
-         <Link  >
+    
+ 
+       
+         
+   
+
          <button className=" bg-inputBg  text-black w-[80px] my-5 text-[22px]  font-semibold  rounded border border-gray-400 ">
          Submit
        </button>
-         </Link>
+      
 
+     
+{/* 
             <Link  className="bg-inputBg  text-black w-[80px] my-5 text-[22px]  font-semibold  rounded border border-gray-400">resultCreate</Link>
-
+ */}
             {error && <h1 className="text-red-400">{error}</h1>}
           </div>
         </form>
+        <button  className=" bg-inputBg  text-black w-[80px] my-5 text-[22px]  font-semibold  rounded border border-gray-400 mx-4">
+        Reset
+      </button>
       </div>
     </div>
   );

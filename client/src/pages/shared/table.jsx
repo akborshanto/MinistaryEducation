@@ -1,22 +1,21 @@
-import React, { useRef } from 'react';
-import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
-import './pdf.css'
-const Table = ({ getLocalStorageData,handleDownloadPDF,handlePrint }) => {
+import React, { useRef } from "react";
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+import "./pdf.css";
+const Table = ({ getLocalStorageData, handleDownloadPDF, handlePrint }) => {
   const componentRef = useRef();
   const handleDownloadPDs = () => {
     const input = componentRef.current;
 
-    html2canvas(input)
-      .then((canvas) => {
-        const imgData = canvas.toDataURL('../../assets/banner_flag.jpg');
-        const pdf = new jsPDF();
-        const imgWidth = 210; // PDF width (A4 size)
-        const imgHeight = (canvas.height * imgWidth) / canvas.width; // Scale height proportionally to width
-        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-        pdf.save('download.pdf');
-      });
-  }
+    html2canvas(input).then((canvas) => {
+      const imgData = canvas.toDataURL("../../assets/banner_flag.jpg");
+      const pdf = new jsPDF();
+      const imgWidth = 210; // PDF width (A4 size)
+      const imgHeight = (canvas.height * imgWidth) / canvas.width; // Scale height proportionally to width
+      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+      pdf.save("download.pdf");
+    });
+  };
   console.log(getLocalStorageData);
   const { examination, year, board, roll, registration } =
     getLocalStorageData?.getStroage || {};
@@ -25,14 +24,14 @@ const Table = ({ getLocalStorageData,handleDownloadPDF,handlePrint }) => {
     getLocalStorageData?.studentInfo || {};
   const { cgpa, marksheet, totalMarks } =
     getLocalStorageData?.studentData || {};
-    const getColorStyle = () => {
-      // Replace with dynamic logic to determine color based on application state or props
-      const color = 'rgb(0, 128, 255)';
-      return { backgroundColor: color };
-    };
+  const getColorStyle = () => {
+    // Replace with dynamic logic to determine color based on application state or props
+    const color = 'rgb(0, 128, 255)';
+    return { backgroundColor: color };
+  };
   return (
-    <div ref={componentRef} className='element' style={getColorStyle()} >
-    <button onClick={handleDownloadPDs}>Download PDF</button>
+    <div ref={componentRef} className="element" style={getColorStyle()}>
+      <button onClick={handleDownloadPDs}>Download PDF</button>
       <h1 className="text-blackBold font-bold text-3xl text-center my-4">
         {examination} Result {year}
       </h1>
@@ -42,7 +41,6 @@ const Table = ({ getLocalStorageData,handleDownloadPDF,handlePrint }) => {
           align="center"
           cellPadding="0"
           cellSpacing="0"
-          
         >
           <thead className="text-start">
             <tr className="border-r-secondary uppercase ">
@@ -101,34 +99,28 @@ const Table = ({ getLocalStorageData,handleDownloadPDF,handlePrint }) => {
             <tr className="border-r-secondary uppercase">
               <th>Code</th>
               <th className="">Subject</th>
-         
-              <th className="uppercase">
-   Grade
-              </th>
+
+              <th className="uppercase">Grade</th>
             </tr>
           </thead>
 
-          <tbody className="text-center bg-headerGray text-blackBold font-semibold" >
-{
-  marksheet?.map(marks=>
-    <tr className="border  border-white">
-      <td>CODE</td>
-      <td>{marks?.subject}</td>
-      <td>{marks?.marks}</td>
-
-    </tr>)
-}
-
-
+          <tbody className="text-center bg-headerGray text-blackBold font-semibold">
+            {marksheet?.map((marks) => (
+              <tr className="border  border-white">
+                <td>CODE</td>
+                <td>{marks?.subject}</td>
+                <td>{marks?.marks}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
-        <h1 className="text-center text-blackBold">Total Marks:{getLocalStorageData?.totalMarks}</h1>
-
+        <h1 className="text-center text-blackBold">
+          Total Marks:{getLocalStorageData?.totalMarks}
+        </h1>
       </div>
 
- <button onClick={handlePrint}>Print Marksheet</button>
+      <button onClick={handlePrint}>Print Marksheet</button>
       <button onClick={handleDownloadPDF}>Download Marksheet as PDF</button>
-
     </div>
   );
 };

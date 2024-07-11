@@ -321,7 +321,7 @@ const ResultCreate = () => {
                   <input
                     type="text"
                     name="subject"
-                    value={field.sub}
+                    value={field.subject}
                     onChange={(event) => handleChange(index, event)}
                     className="textfield06"
                   ></input>
